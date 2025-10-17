@@ -1,4 +1,4 @@
-# MOIS API Layout
+# MOIS
 
 ## Fakulty
 
@@ -107,9 +107,17 @@ HTTP 200
 
 * Props: name, facultyId, createdAt
 
-### GET all
+### GET all by faculty
 
-* /faculty/{facultyUuid}/computerRoom
+* /room
+
+Request:
+
+```json
+{
+  "facultyId": uuid
+}
+```
 
 Response:
 
@@ -128,7 +136,7 @@ HTTP 200
 
 ### GET one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room/{id}
 
 Response:
 
@@ -145,8 +153,7 @@ HTTP 200
 
 ### POST create one
 
-* /faculty/{facultyUuid}/computerRoom
-
+* /room
 Request:
 
 ```json
@@ -171,7 +178,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room/{id}
 
 Request:
 
@@ -198,7 +205,7 @@ HTTP 200
 
 Delete proběhne pouze pokud neexistuje žádný `computer`, který by měl FK `computerRoomId`.
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room/{id}
 
 Response:
 
@@ -207,12 +214,19 @@ HTTP 200
 ---
 
 ## PC
-
 * Props: status, computerRoomId, config: {CPU, RAM, GPU}, createdAt
 
-### GET all
+### GET all by faculty and room
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer
+* /computer
+
+Request:
+
+```json
+{
+  "roomId": long
+}
+```
 
 Response:
 
@@ -223,7 +237,7 @@ Response:
     "status": {
       "id": "id",
       "name": "string"
-    },
+    }, - ? Unless we want the status to be editable by user, I guess ENUM would be enough
     "computerRoomId": "uuid",
     "config": {
       "CPU": "string",
@@ -239,7 +253,7 @@ HTTP 200
 
 ### GET one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
 
 Response:
 
@@ -264,7 +278,7 @@ HTTP 200
 
 ### POST create one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer
+* /computer
 
 Request:
 
@@ -306,7 +320,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
 
 Request example:
 
@@ -345,14 +359,13 @@ HTTP 200
 
 ### DELETE one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
 
 Response:
 
 HTTP 200
 
 ---
-
 ## Rezervace
 
 * Props: userId, computerId, startTime, endTime, createdAt
@@ -410,7 +423,7 @@ HTTP 200
 
 ### GET one
 
-* /reservation
+* /reservation/{id}
 
 #### GET one by userId
 
