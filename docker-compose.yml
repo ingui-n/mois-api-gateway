@@ -1,0 +1,10 @@
+services:
+  mois-api-gateway:
+    container_name: mois-api-gateway
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    env_file:
+      - .env
+#    network_mode: host
