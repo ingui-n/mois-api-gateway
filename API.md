@@ -2,7 +2,8 @@
 
 ## Fakulty
 
-* Props: name, shortcut, createdAt
+* Props: name, shortcut, reservationDateStart, reservationDateEnd, maxUserReservationCount, maxUserReservationTime,
+  maxUserReservationTimeWeakly, createdAt
 
 ### GET all
 
@@ -16,6 +17,11 @@ Response:
     "id": "uuid",
     "name": "string",
     "shortcut": "string",
+    "reservationDateStart": "time", // čas první možné rezervace pro každý den
+    "reservationDateEnd": "time", // čas do kdy je možné rezervovat
+    "maxUserReservationCount": "number", // maximální počet rezervací celkem
+    "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci
+    "maxUserReservationTimeWeakly": "number", // za týden pro uživatele
     "createdAt": "dateTime"
   }
 ]
@@ -34,6 +40,11 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "reservationDateStart": "time",
+  "reservationDateEnd": "time",
+  "maxUserReservationCount": "number",
+  "maxUserReservationTime": "number",
+  "maxUserReservationTimeWeakly": "number",
   "createdAt": "dateTime"
 }
 ```
@@ -60,6 +71,11 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "reservationDateStart": "time",
+  "reservationDateEnd": "time",
+  "maxUserReservationCount": "number",
+  "maxUserReservationTime": "number",
+  "maxUserReservationTimeWeakly": "number",
   "createdAt": "dateTime"
 }
 ```
@@ -85,6 +101,11 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "reservationDateStart": "time",
+  "reservationDateEnd": "time",
+  "maxUserReservationCount": "number",
+  "maxUserReservationTime": "number",
+  "maxUserReservationTimeWeakly": "number",
   "createdAt": "dateTime"
 }
 ```
@@ -109,9 +130,15 @@ HTTP 200
 
 ### GET all
 
-* /room
+* /computerRoom
 
-{roomId}
+Request:
+
+```json
+{
+  "facultyId": "uuid"
+}
+```
 
 Response:
 
@@ -130,7 +157,7 @@ HTTP 200
 
 ### GET one
 
-* /room
+* /computerRoom/{id}
 
 Response:
 
@@ -147,7 +174,7 @@ HTTP 200
 
 ### POST create one
 
-* /room
+* /computerRoom
 
 Request:
 
@@ -173,7 +200,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /room/{id}
+* /computerRoom/{id}
 
 Request:
 
@@ -200,7 +227,7 @@ HTTP 200
 
 Delete proběhne pouze pokud neexistuje žádný `computer`, který by měl FK `computerRoomId`.
 
-* /room/{id}
+* /computerRoom/{id}
 
 Response:
 
@@ -210,11 +237,19 @@ HTTP 200
 
 ## PC
 
-* Props: status, computerRoomId, config: {CPU, RAM, GPU}, createdAt
+* Props: name, available, computerRoomId, configId, createdAt
 
-### GET all
+### GET all by computerRoomId
 
 * /computer
+
+Request:
+
+```json
+{
+  "computerRoomId": "uuid"
+}
+```
 
 Response:
 
@@ -222,6 +257,7 @@ Response:
 [
   {
     "id": "uuid",
+    "name": "string",
     "available": "boolean",
     "computerRoomId": "uuid",
     "configId": "uuid",
@@ -241,6 +277,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -258,6 +295,7 @@ Request:
 
 ```json
 {
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid"
@@ -269,6 +307,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -286,6 +325,7 @@ Request example:
 
 ```json
 {
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid"
@@ -297,6 +337,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -432,21 +473,11 @@ HTTP 200
 
 ## Rezervace
 
-* Props: userId, computerId, startTime, endTime, createdAt
+* Props: {computer: {computerRoom, computerConfig}}  userId, computerId, startTime, endTime, password, deletedAt, createdAt
 
 ### GET all
 
 * /reservations
-
-#### GET all by computerRoomId
-
-Request:
-
-```json
-{
-  "computerRoomId": "uuid"
-}
-```
 
 #### GET all by computerId
 
@@ -454,7 +485,9 @@ Request:
 
 ```json
 {
-  "computerId": "uuid"
+  "computerId": "uuid",
+  "from": "datetime",
+  "to": "datetime"
 }
 ```
 
@@ -474,10 +507,33 @@ Response:
 [
   {
     "id": "uuid",
-    "computerId": "uuid",
+    "computer": {
+      "id": "uuid",
+      "name": "string",
+      "available": "boolean",
+      "computerRoom": {
+        "id": "uuid",
+        "name": "string",
+        "available": "boolean",
+        "computerRoomId": "uuid",
+        "configId": "uuid",
+        "createdAt": "dateTime"
+      },
+      "computerConfig": {
+        "id": "uuid",
+        "name": "string",
+        "cpu": "string",
+        "ram": "string",
+        "gpu": "string",
+        "createdAt": "dateTime"
+      },
+      "createdAt": "dateTime"
+    },
     "userId": "uuid",
     "startTime": "dateTime",
     "endTime": "dateTime",
+    "password": "string",
+    "deletedAt": "dateTime|null",
     "createdAt": "dateTime"
   }
 ]
@@ -495,7 +551,7 @@ Request:
 
 ```json
 {
-  "userId": "uuid"
+  "id": "uuid"
 }
 ```
 
@@ -524,10 +580,33 @@ Response:
 ```json
 {
   "id": "uuid",
-  "computerId": "uuid",
+  "computer": {
+    "id": "uuid",
+    "name": "string",
+    "available": "boolean",
+    "computerRoom": {
+      "id": "uuid",
+      "name": "string",
+      "available": "boolean",
+      "computerRoomId": "uuid",
+      "configId": "uuid",
+      "createdAt": "dateTime"
+    },
+    "computerConfig": {
+      "id": "uuid",
+      "name": "string",
+      "cpu": "string",
+      "ram": "string",
+      "gpu": "string",
+      "createdAt": "dateTime"
+    },
+    "createdAt": "dateTime"
+  },
   "userId": "uuid",
   "startTime": "dateTime",
   "endTime": "dateTime",
+  "password": "string",
+  "deletedAt": "dateTime|null",
   "createdAt": "dateTime"
 }
 ```
@@ -538,6 +617,7 @@ HTTP 200
 
 * id, čas - kontrola zda je PC možné zarezervovat a zda není např v opravě
 
+Před rezervací se spočítá čas rezervace pro daný týden, pokud přesáhne X hodin, zamítnout.
 
 * /reservation
 
@@ -557,10 +637,33 @@ Response:
 ```json
 {
   "id": "uuid",
-  "computerId": "uuid",
+  "computer": {
+    "id": "uuid",
+    "name": "string",
+    "available": "boolean",
+    "computerRoom": {
+      "id": "uuid",
+      "name": "string",
+      "available": "boolean",
+      "computerRoomId": "uuid",
+      "configId": "uuid",
+      "createdAt": "dateTime"
+    },
+    "computerConfig": {
+      "id": "uuid",
+      "name": "string",
+      "cpu": "string",
+      "ram": "string",
+      "gpu": "string",
+      "createdAt": "dateTime"
+    },
+    "createdAt": "dateTime"
+  },
   "userId": "uuid",
   "startTime": "dateTime",
   "endTime": "dateTime",
+  "password": "string",
+  "deletedAt": "dateTime|null",
   "createdAt": "dateTime"
 }
 ```
@@ -570,6 +673,8 @@ HTTP 201
 ### DELETE one
 
 * /reservation/{id}
+
+Nemaže náznam ale nastavuje deletedAt na dateTime
 
 Response:
 
