@@ -74,7 +74,8 @@ Request:
 
 ```json
 {
-  "name": "string"
+  "name": "string",
+  "shortcut": "string"
 }
 ```
 
@@ -109,9 +110,34 @@ HTTP 200
 
 ### GET all
 
-* /room
+* /computerRoom
 
-{roomId}
+
+Response:
+
+```json
+[
+  {
+    "id": "uuid",
+    "facultyId": "uuid",
+    "name": "string",
+    "createdAt": "dateTime"
+  }
+]
+```
+
+HTTP 200
+
+### GET all by faculty
+
+* /computerRoom
+
+Request: 
+```json
+{
+    "facultyId": "uuid"
+}
+```
 
 Response:
 
@@ -130,7 +156,7 @@ HTTP 200
 
 ### GET one
 
-* /room
+* /computerRoom/{id}
 
 Response:
 
@@ -147,7 +173,7 @@ HTTP 200
 
 ### POST create one
 
-* /room
+* /computerRoom
 
 Request:
 
@@ -173,7 +199,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /room/{id}
+* /computerRoom/{id}
 
 Request:
 
@@ -200,7 +226,7 @@ HTTP 200
 
 Delete proběhne pouze pokud neexistuje žádný `computer`, který by měl FK `computerRoomId`.
 
-* /room/{id}
+* /computerRoom/{id}
 
 Response:
 
@@ -210,7 +236,7 @@ HTTP 200
 
 ## PC
 
-* Props: status, computerRoomId, config: {CPU, RAM, GPU}, createdAt
+* Props: name, available, roomId, config: {name, CPU, RAM, GPU}, createdAt
 
 ### GET all
 
@@ -222,6 +248,7 @@ Response:
 [
   {
     "id": "uuid",
+    "name": "string",
     "available": "boolean",
     "computerRoomId": "uuid",
     "configId": "uuid",
@@ -232,6 +259,32 @@ Response:
 
 HTTP 200
 
+### GET all by room
+
+* /computer
+
+Request:
+```json
+{
+  "computerRoomId": "uuid"
+}
+```
+
+Response:
+
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "available": "boolean",
+    "roomId": "uuid",
+    "configId": "uuid",
+    "createdAt": "dateTime"
+  }
+]
+```
+
 ### GET one
 
 * /computer/{id}
@@ -241,6 +294,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -258,6 +312,7 @@ Request:
 
 ```json
 {
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid"
@@ -269,6 +324,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -286,6 +342,7 @@ Request example:
 
 ```json
 {
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid"
@@ -297,6 +354,7 @@ Response:
 ```json
 {
   "id": "uuid",
+  "name": "string",
   "available": "boolean",
   "computerRoomId": "uuid",
   "configId": "uuid",
@@ -334,6 +392,7 @@ Response:
     "cpu": "string",
     "ram": "string",
     "gpu": "string",
+    "os": "string",
     "createdAt": "dateTime"
   }
 ]
@@ -354,6 +413,7 @@ Response:
   "cpu": "string",
   "ram": "string",
   "gpu": "string",
+  "os": "string",
   "createdAt": "dateTime"
 }
 ```
@@ -371,7 +431,8 @@ Request:
   "name": "string",
   "cpu": "string",
   "ram": "string",
-  "gpu": "string"
+  "gpu": "string",
+  "os": "string"
 }
 ```
 
@@ -384,6 +445,7 @@ Response:
   "cpu": "string",
   "ram": "string",
   "gpu": "string",
+  "os": "string",
   "createdAt": "dateTime"
 }
 ```
@@ -401,7 +463,8 @@ Request example:
   "name": "string",
   "cpu": "string",
   "ram": "string",
-  "gpu": "string"
+  "gpu": "string",
+  "os": "string"
 }
 ```
 
@@ -414,6 +477,7 @@ Response:
   "cpu": "string",
   "ram": "string",
   "gpu": "string",
+  "os": "string",
   "createdAt": "dateTime"
 }
 ```
