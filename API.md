@@ -25,7 +25,7 @@ HTTP 200
 
 ### GET one
 
-* /faculty/{uuid}
+* /faculty/{id}
 
 Response:
 
@@ -68,7 +68,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /faculty/{uuid}
+* /faculty/{id}
 
 Request:
 
@@ -95,7 +95,7 @@ HTTP 200
 
 Delete proběhne pouze pokud neexistuje ani jedna `computerRoom`, která by měla FK `facultyId`.
 
-* /faculty/{uuid}
+* /faculty/{id}
 
 Response:
 
@@ -109,7 +109,9 @@ HTTP 200
 
 ### GET all
 
-* /faculty/{facultyUuid}/computerRoom
+* /room
+
+{roomId}
 
 Response:
 
@@ -128,7 +130,7 @@ HTTP 200
 
 ### GET one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room
 
 Response:
 
@@ -145,7 +147,7 @@ HTTP 200
 
 ### POST create one
 
-* /faculty/{facultyUuid}/computerRoom
+* /room
 
 Request:
 
@@ -171,7 +173,7 @@ HTTP 201
 
 ### PUT edit one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room/{id}
 
 Request:
 
@@ -198,7 +200,7 @@ HTTP 200
 
 Delete proběhne pouze pokud neexistuje žádný `computer`, který by měl FK `computerRoomId`.
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}
+* /room/{id}
 
 Response:
 
@@ -212,7 +214,7 @@ HTTP 200
 
 ### GET all
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer
+* /computer
 
 Response:
 
@@ -220,16 +222,9 @@ Response:
 [
   {
     "id": "uuid",
-    "status": {
-      "id": "id",
-      "name": "string"
-    },
+    "available": "boolean",
     "computerRoomId": "uuid",
-    "config": {
-      "CPU": "string",
-      "RAM": "string",
-      "GPU": "string"
-    },
+    "configId": "uuid",
     "createdAt": "dateTime"
   }
 ]
@@ -239,23 +234,16 @@ HTTP 200
 
 ### GET one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
 
 Response:
 
 ```json
 {
   "id": "uuid",
-  "status": {
-    "id": "id",
-    "name": "string"
-  },
+  "available": "boolean",
   "computerRoomId": "uuid",
-  "config": {
-    "CPU": "string",
-    "RAM": "string",
-    "GPU": "string"
-  },
+  "configId": "uuid",
   "createdAt": "dateTime"
 }
 ```
@@ -264,22 +252,15 @@ HTTP 200
 
 ### POST create one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer
+* /computer
 
 Request:
 
 ```json
 {
-  "status": {
-    "id": "id",
-    "name": "string"
-  },
+  "available": "boolean",
   "computerRoomId": "uuid",
-  "config": {
-    "CPU": "string",
-    "RAM": "string",
-    "GPU": "string"
-  }
+  "configId": "uuid"
 }
 ```
 
@@ -288,16 +269,9 @@ Response:
 ```json
 {
   "id": "uuid",
-  "status": {
-    "id": "id",
-    "name": "string"
-  },
+  "available": "boolean",
   "computerRoomId": "uuid",
-  "config": {
-    "CPU": "string",
-    "RAM": "string",
-    "GPU": "string"
-  },
+  "configId": "uuid",
   "createdAt": "dateTime"
 }
 ```
@@ -306,19 +280,15 @@ HTTP 201
 
 ### PUT edit one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
 
 Request example:
 
 ```json
 {
-  "status": {
-    "id": "id",
-    "name": "string"
-  },
-  "config": {
-    "RAM": "string"
-  }
+  "available": "boolean",
+  "computerRoomId": "uuid",
+  "configId": "uuid"
 }
 ```
 
@@ -327,16 +297,9 @@ Response:
 ```json
 {
   "id": "uuid",
-  "status": {
-    "id": "id",
-    "name": "string"
-  },
+  "available": "boolean",
   "computerRoomId": "uuid",
-  "config": {
-    "CPU": "string",
-    "RAM": "string",
-    "GPU": "string"
-  },
+  "configId": "uuid",
   "createdAt": "dateTime"
 }
 ```
@@ -345,7 +308,121 @@ HTTP 200
 
 ### DELETE one
 
-* /faculty/{facultyUuid}/computerRoom/{computerRoomUuid}/computer/{computerUuid}
+* /computer/{id}
+
+Response:
+
+HTTP 200
+
+---
+
+## PC configuration
+
+* Props: name, cpu, ram, gpu, createdAt
+
+### GET all
+
+* /computerConfig
+
+Response:
+
+```json
+[
+  {
+    "id": "uuid",
+    "name": "string",
+    "cpu": "string",
+    "ram": "string",
+    "gpu": "string",
+    "createdAt": "dateTime"
+  }
+]
+```
+
+HTTP 200
+
+### GET one
+
+* /computerConfig/{id}
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "name": "string",
+  "cpu": "string",
+  "ram": "string",
+  "gpu": "string",
+  "createdAt": "dateTime"
+}
+```
+
+HTTP 200
+
+### POST create one
+
+* /computerConfig
+
+Request:
+
+```json
+{
+  "name": "string",
+  "cpu": "string",
+  "ram": "string",
+  "gpu": "string"
+}
+```
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "name": "string",
+  "cpu": "string",
+  "ram": "string",
+  "gpu": "string",
+  "createdAt": "dateTime"
+}
+```
+
+HTTP 201
+
+### PUT edit one
+
+* /computerConfig/{id}
+
+Request example:
+
+```json
+{
+  "name": "string",
+  "cpu": "string",
+  "ram": "string",
+  "gpu": "string"
+}
+```
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "name": "string",
+  "cpu": "string",
+  "ram": "string",
+  "gpu": "string",
+  "createdAt": "dateTime"
+}
+```
+
+HTTP 200
+
+### DELETE one
+
+* /computerConfig/{id}
 
 Response:
 
@@ -411,6 +488,16 @@ HTTP 200
 ### GET one
 
 * /reservation
+
+#### GET one by id
+
+Request:
+
+```json
+{
+  "userId": "uuid"
+}
+```
 
 #### GET one by userId
 
@@ -482,7 +569,7 @@ HTTP 201
 
 ### DELETE one
 
-* /reservation/{uuid}
+* /reservation/{id}
 
 Response:
 
