@@ -241,15 +241,7 @@ HTTP 200
 
 ### GET all by computerRoomId
 
-* /computer
-
-Request:
-
-```json
-{
-  "computerRoomId": "uuid"
-}
-```
+* /computer?computerRoomId="uuid"
 
 Response:
 
@@ -481,25 +473,11 @@ HTTP 200
 
 #### GET all by computerId
 
-Request:
-
-```json
-{
-  "computerId": "uuid",
-  "from": "datetime",
-  "to": "datetime"
-}
-```
+* /reservations?computerId="uuid"&from="dateTime"&to="dateTime"
 
 #### GET all by userId
 
-Request:
-
-```json
-{
-  "userId": "uuid"
-}
-```
+* /reservations?userId="uuid"
 
 Response:
 
@@ -547,33 +525,15 @@ HTTP 200
 
 #### GET one by id
 
-Request:
-
-```json
-{
-  "id": "uuid"
-}
-```
+* /reservation?id="uuid"
 
 #### GET one by userId
 
-Request:
-
-```json
-{
-  "userId": "uuid"
-}
-```
+* /reservation?userId="uuid"
 
 #### GET one by computerId
 
-Request:
-
-```json
-{
-  "computerId": "uuid"
-}
-```
+* /reservation?computerId="uuid"
 
 Response:
 
