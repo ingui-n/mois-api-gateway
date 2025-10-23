@@ -7,10 +7,21 @@ const forwarder = async (req, forwardUrl, payload) => {
   url.host = redirectUrl.host;
   url.protocol = redirectUrl.protocol;
 
+  let body = null;
+
+  if (req.body !== null) {
+    body = req.body;
+
+    if (req.method === 'POST') {
+      //todo check payload fileds
+      body = {...body, payload}
+    }
+  }
+
   return fetch(url, {
     method: req.method,
     headers: req.headers,
-    body: req.body,
+    body: body,
     duplex: "half",
   });
 };
@@ -30,21 +41,31 @@ Bun.serve({
       DELETE: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
-    '/faculty/:facultyId/computerRoom': {
+    '/computerRoom': {
       GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
       POST: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
-    '/faculty/:facultyId/computerRoom/:id': {
+    '/computerRoom/:id': {
       GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
       PUT: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
       DELETE: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
-    '/faculty/:facultyId/computerRoom/:computerRoomId/computer': {
+    '/computer': {
       GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
       POST: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
-    '/faculty/:facultyId/computerRoom/:computerRoomId/computer/:id': {
+    '/computer/:id': {
+      GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      PUT: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      DELETE: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
+    },
+
+    '/computerConfig': {
+      GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      POST: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+    },
+    '/computerConfig/:id': {
       GET: req => authorize(req, forwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
       PUT: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
       DELETE: req => authorize(req, forwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
