@@ -130,15 +130,7 @@ HTTP 200
 
 ### GET all
 
-* /computerRoom
-
-Request:
-
-```json
-{
-  "facultyId": "uuid"
-}
-```
+* /computerRoom?facultyId="uuid"
 
 Response:
 
