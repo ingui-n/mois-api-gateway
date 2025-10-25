@@ -540,21 +540,9 @@ Response:
 
 HTTP 200
 
-### GET one
+### GET one by id
 
-* /reservation
-
-#### GET one by id
-
-* /reservation?id="uuid"
-
-#### GET one by userId
-
-* /reservation?userId="uuid"
-
-#### GET one by computerId
-
-* /reservation?computerId="uuid"
+* /reservation/{id}
 
 Response:
 
@@ -606,8 +594,8 @@ Request:
 {
   "computerId": "uuid",
   "userId": "uuid",
-  "startTime": "dateTime",
-  "endTime": "dateTime"
+  "startDateTime": "dateTime",
+  "endDateTime": "dateTime"
 }
 ```
 
