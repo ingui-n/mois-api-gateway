@@ -2,7 +2,7 @@
 
 ## Fakulty
 
-* Props: name, shortcut, reservationDateStart, reservationDateEnd, maxUserReservationCount, maxUserReservationTime,
+* Props: name, shortcut, reservationTimeStart, reservationTimeEnd, maxUserReservationCount, maxUserReservationTime,
   maxUserReservationTimeWeekly, createdAt
 
 ### GET all
@@ -17,11 +17,11 @@ Response:
     "id": "uuid",
     "name": "string",
     "shortcut": "string",
-    "reservationDateStart": "time", // čas první možné rezervace pro každý den
-    "reservationDateEnd": "time", // čas do kdy je možné rezervovat
+    "reservationTimeStart": "time", // čas první možné rezervace pro každý den
+    "reservationTimeEnd": "time", // čas do kdy je možné rezervovat
     "maxUserReservationCount": "number", // maximální počet rezervací celkem
-    "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci
-    "maxUserReservationTimeWeekly": "number", // za týden pro uživatele
+    "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci (minuty)
+    "maxUserReservationTimeWeekly": "number", // za týden pro uživatele (minuty)
     "createdAt": "dateTime"
   }
 ]
@@ -40,8 +40,8 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
-  "reservationDateStart": "time",
-  "reservationDateEnd": "time",
+  "reservationTimeStart": "time",
+  "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
   "maxUserReservationTimeWeekly": "number",
@@ -71,8 +71,8 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
-  "reservationDateStart": "time",
-  "reservationDateEnd": "time",
+  "reservationTimeStart": "time",
+  "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
   "maxUserReservationTimeWeekly": "number",
@@ -101,8 +101,8 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
-  "reservationDateStart": "time",
-  "reservationDateEnd": "time",
+  "reservationTimeStart": "time",
+  "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
   "maxUserReservationTimeWeekly": "number",
