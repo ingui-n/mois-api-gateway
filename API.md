@@ -3,7 +3,7 @@
 ## Fakulty
 
 * Props: name, shortcut, reservationDateStart, reservationDateEnd, maxUserReservationCount, maxUserReservationTime,
-  maxUserReservationTimeWeakly, createdAt
+  maxUserReservationTimeWeekly, createdAt
 
 ### GET all
 
@@ -21,7 +21,7 @@ Response:
     "reservationDateEnd": "time", // čas do kdy je možné rezervovat
     "maxUserReservationCount": "number", // maximální počet rezervací celkem
     "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci
-    "maxUserReservationTimeWeakly": "number", // za týden pro uživatele
+    "maxUserReservationTimeWeekly": "number", // za týden pro uživatele
     "createdAt": "dateTime"
   }
 ]
@@ -44,7 +44,7 @@ Response:
   "reservationDateEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
-  "maxUserReservationTimeWeakly": "number",
+  "maxUserReservationTimeWeekly": "number",
   "createdAt": "dateTime"
 }
 ```
@@ -75,7 +75,7 @@ Response:
   "reservationDateEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
-  "maxUserReservationTimeWeakly": "number",
+  "maxUserReservationTimeWeekly": "number",
   "createdAt": "dateTime"
 }
 ```
@@ -105,7 +105,7 @@ Response:
   "reservationDateEnd": "time",
   "maxUserReservationCount": "number",
   "maxUserReservationTime": "number",
-  "maxUserReservationTimeWeakly": "number",
+  "maxUserReservationTimeWeekly": "number",
   "createdAt": "dateTime"
 }
 ```
