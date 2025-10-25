@@ -271,6 +271,37 @@ Response:
 
 HTTP 200
 
+### GET one unwrapped
+
+* /computer/{id}?unwrap=true
+
+Response:
+
+```json
+{
+  "id": "uuid",
+  "name": "string",
+  "available": "boolean",
+  "computerRoom": {
+    "id": "uuid",
+    "facultyId": "uuid",
+    "name": "string",
+    "createdAt": "dateTime"
+  },
+  "computerConfig": {
+    "id": "uuid",
+    "name": "string",
+    "cpu": "string",
+    "ram": "string",
+    "gpu": "string",
+    "createdAt": "dateTime"
+  },
+  "createdAt": "dateTime"
+}
+```
+
+HTTP 200
+
 ### POST create one
 
 * /computer
