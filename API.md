@@ -483,10 +483,8 @@ Response:
       "available": "boolean",
       "computerRoom": {
         "id": "uuid",
+        "facultyId": "uuid",
         "name": "string",
-        "available": "boolean",
-        "computerRoomId": "uuid",
-        "configId": "uuid",
         "createdAt": "dateTime"
       },
       "computerConfig": {
@@ -538,10 +536,8 @@ Response:
     "available": "boolean",
     "computerRoom": {
       "id": "uuid",
+      "facultyId": "uuid",
       "name": "string",
-      "available": "boolean",
-      "computerRoomId": "uuid",
-      "configId": "uuid",
       "createdAt": "dateTime"
     },
     "computerConfig": {
@@ -595,10 +591,8 @@ Response:
     "available": "boolean",
     "computerRoom": {
       "id": "uuid",
+      "facultyId": "uuid",
       "name": "string",
-      "available": "boolean",
-      "computerRoomId": "uuid",
-      "configId": "uuid",
       "createdAt": "dateTime"
     },
     "computerConfig": {
