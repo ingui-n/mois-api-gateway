@@ -1,11 +1,14 @@
 import {authorize} from "./authorization.js";
 import {commonForwarder} from "./routes/commonForwarder.js";
 import {forwardGetReservations} from "./routes/reservations.js";
+import {status} from "./routes/status.js";
 
 Bun.serve({
   port: 3000,
   routes: {
     '/status': () => new Response("OK"),
+    '/status/computes': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
+    '/status/reservations': req => status(req, Bun.env.MICROSERVICE_RESERVATIONS),
 
     '/faculty': {
       GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
