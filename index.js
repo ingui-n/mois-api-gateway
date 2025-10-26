@@ -7,7 +7,7 @@ Bun.serve({
   port: 3000,
   routes: {
     '/status': () => new Response("OK"),
-    '/status/computes': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
+    '/status/computers': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
     '/status/reservations': req => status(req, Bun.env.MICROSERVICE_RESERVATIONS),
 
     '/faculty': {
