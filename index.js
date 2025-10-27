@@ -1,6 +1,5 @@
 import {authorize} from "./authorization.js";
 import {commonForwarder} from "./routes/commonForwarder.js";
-import {forwardGetReservations} from "./routes/reservations.js";
 import {status} from "./routes/status.js";
 
 Bun.serve({
@@ -51,14 +50,14 @@ Bun.serve({
     },
 
     '/reservations': {
-      GET: req => authorize(req, forwardGetReservations, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
     },
     '/reservation': {
       GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
       POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_RESERVATIONS),
     },
     '/reservation/:id': {
-      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_RESERVATIONS),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
     },
   },
 
