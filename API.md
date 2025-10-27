@@ -1,5 +1,25 @@
 # MOIS API Layout
 
+### What does the API Gateway do?
+
+Testuje zda je uživatel přihlášen a zda oplívá správnou rolí pro zobrazení dat z mikroservis. Všechny cesty (endpointy) 
+počítají s autorizačním Bearer tokenem, který je zkontrolován a některá data z něho se nastaví do hlaviček (headers) 
+požadavků, které dále směřují do jednotlivých mikroservis. 
+
+Co se týká jednotivých přístupových pravidel nad endpointy pro konkrétní uživatele, to je věc jednotlivých mikroservis.
+
+Seznam nastavených hlaviček je následující:
+
+| Header           | Data type                                    |
+|------------------|----------------------------------------------|
+| X-User-Id        | string uuid                                  |
+| X-User-Email     | string email                                 |
+| X-User-Firstname | string                                       |
+| X-User-Lastname  | string                                       |
+| X-User-Roles     | list eg. ["admin", "user", "offline_access"] |
+
+---
+
 ## Fakulty
 
 * Props: name, shortcut, reservationTimeStart, reservationTimeEnd, maxUserReservationCount, maxUserReservationTime,
