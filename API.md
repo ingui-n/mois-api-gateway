@@ -60,7 +60,12 @@ Request:
 ```json
 {
   "name": "string",
-  "shortcut": "string"
+  "shortcut": "string",
+  "reservationTimeStart": "time",
+  "reservationTimeEnd": "time",
+  "maxUserReservationCount": "number",
+  "maxUserReservationTime": "number",
+  "maxUserReservationTimeWeekly": "number"
 }
 ```
 
