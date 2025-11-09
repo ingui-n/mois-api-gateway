@@ -17,7 +17,7 @@ const verifyToken = async req => {
       issuer: `${Bun.env.KEYCLOAK_URL}/realms/${Bun.env.KEYCLOAK_REALM}`
     });
 
-    if (payload.azp !== Bun.env.KEYCLOAK_CLIENT_ID)
+    if (!Bun.env.KEYCLOAK_CLIENT_ID.split(',').includes(payload?.azp))
       return null;
 
     return payload;
@@ -35,7 +35,7 @@ export const authorize = async (req, handler, role = "", forwardUrl = "") => {
   const payload = await verifyToken(req);
   if (!payload)
     return new Response("Unauthorized", {status: 401});
-
+  console.log(payload)
   if (role && !hasRole(payload, role))
     return new Response("Forbidden", {status: 403});
 
