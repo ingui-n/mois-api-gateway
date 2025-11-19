@@ -5,7 +5,7 @@ import {status} from "./routes/status.js";
 Bun.serve({
   port: 3000,
   routes: {
-    '/status': () => new Response("OK"),
+    '/status': () => withCORS(() => new Response("OK")),
     '/status/computers': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
     '/status/reservations': req => status(req, Bun.env.MICROSERVICE_RESERVATIONS),
 
@@ -62,6 +62,16 @@ Bun.serve({
   },
 
   fetch(req) {
+    if (req.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": Bun.env.FRONTEND_URL,
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      });
+    }
+
     console.error('Requested route not found:', req);
     return new Response("Not Found", {status: 404});
   },
