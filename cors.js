@@ -6,6 +6,7 @@ export const withCORS = (handler) => {
           "Access-Control-Allow-Origin": Bun.env.FRONTEND_URL,
           "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true",
         },
       });
     }
@@ -14,6 +15,7 @@ export const withCORS = (handler) => {
 
     const headers = new Headers(res.headers);
     headers.set("Access-Control-Allow-Origin", Bun.env.FRONTEND_URL);
+    headers.set("Access-Control-Allow-Credentials", "true");
 
     return new Response(res.body, {
       status: res.status,
