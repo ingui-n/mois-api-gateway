@@ -33,7 +33,7 @@ const hasRole = (payload, role = "") => {
 
 export const authorize = async (req, handler, role = "", forwardUrl = "") => {
   const payload = await verifyToken(req);
-  console.log(payload)
+
   if (!payload)
     return new Response("Unauthorized", {status: 401});
 

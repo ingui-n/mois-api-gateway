@@ -1,5 +1,5 @@
-const withCORS = (handler) => {
-  return (req) => {
+export const withCORS = (handler) => {
+  return async (req) => {
     if (req.method === "OPTIONS") {
       return new Response(null, {
         headers: {
