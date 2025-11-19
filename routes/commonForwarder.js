@@ -12,6 +12,7 @@ export const commonForwarder = async (req, forwardUrl, payload) => {
       const jsonBody = await req.body.json();
       body = JSON.stringify(jsonBody);
     } catch (e) {
+      console.error(e.message);
       return new Response("Bad request", {status: 400});
     }
   }

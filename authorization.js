@@ -35,7 +35,7 @@ export const authorize = async (req, handler, role = "", forwardUrl = "") => {
   const payload = await verifyToken(req);
   if (!payload)
     return new Response("Unauthorized", {status: 401});
-  console.log(payload)
+
   if (role && !hasRole(payload, role))
     return new Response("Forbidden", {status: 403});
 
