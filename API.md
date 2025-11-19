@@ -18,6 +18,9 @@ Seznam nastavených hlaviček je následující:
 | X-User-Lastname  | string                                       |
 | X-User-Roles     | list eg. ["admin", "user", "offline_access"] |
 
+`X-User-Firstname` a `X-User-Lastname` jsou zak=odované za použití `encodeURIComponent()` kvůli znakům jako š, č, ř, 
+atd. Před použitím je nutné je dekódovat. Například za použití `decodeURIComponent()`.
+
 ---
 
 ## Fakulty
@@ -523,7 +526,13 @@ HTTP 200
 
 * /reservations?computerId="uuid"&from="dateTime"&to="dateTime"
 
+#### GET all by dates
+
+* /reservations?from="dateTime"&to="dateTime"
+
 #### GET all by userId
+
+Returns only current or future reservations
 
 * /reservations?userId="uuid"
 
