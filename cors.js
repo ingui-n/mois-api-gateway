@@ -7,13 +7,15 @@ export const withCORS = (handler) => async (req) => {
   console.log('request origin:', origin)
   console.log('selected from env:', corsOrigin)
 
+  const requestedHeaders = req.headers.get("Access-Control-Request-Headers") || "";
+
   if (req.method === "OPTIONS") {
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": corsOrigin,
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": requestedHeaders,
       },
     });
   }
