@@ -1,3 +1,5 @@
+import {getCORSHeaders} from "../cors.js";
+
 export const status = async (req, forwardUrl) => {
   const redirectUrl = new URL(forwardUrl);
   const url = new URL(req.url);
@@ -6,9 +8,14 @@ export const status = async (req, forwardUrl) => {
   url.protocol = redirectUrl.protocol;
   url.pathname = '/status';
 
+  const corsHeaders = Object.fromEntries(getCORSHeaders());
+
   return fetch(url, {
     method: 'GET',
-    headers: req.headers,
+    headers: {
+      ...req.headers,
+      ...corsHeaders,
+    },
     duplex: "half",
   })
     .catch((err) => {

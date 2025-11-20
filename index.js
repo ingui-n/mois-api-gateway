@@ -7,61 +7,62 @@ Bun.serve({
   port: 3000,
   routes: {
     '/status': withCORS(() => new Response("OK")),
-    '/status/computers': withCORS(req => status(req, Bun.env.MICROSERVICE_COMPUTERS)),
-    '/status/reservations': withCORS(req => status(req, Bun.env.MICROSERVICE_RESERVATIONS)),
+    '/status/computers': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
+    '/status/reservations': req => status(req, Bun.env.MICROSERVICE_RESERVATIONS),
     '/faculty': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
     '/faculty/:id': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      PUT: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
-      DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS))
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      PUT: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
     '/computerRoom': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
     '/computerRoom/:id': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      PUT: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
-      DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS))
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      PUT: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
     '/computer': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
     '/computer/:id': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      PUT: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
-      DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS))
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      PUT: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
     '/computerConfig': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
     },
     '/computerConfig/:id': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
-      PUT: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
-      DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS))
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
+      PUT: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)
     },
 
     '/reservations': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
     },
     '/reservation': {
-      GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_RESERVATIONS)),
+      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
+      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_RESERVATIONS),
     },
     '/reservation/:id': {
-      DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
+      DELETE: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS),
     },
   },
 
   fetch(req) {
+    // CORS for OPTIONS
     if (req.method === "OPTIONS") {
       return new Response(null, {
         headers: {
