@@ -63,8 +63,12 @@ Bun.serve({
   },
 
   fetch(req) {
-    console.error('Requested route not found:', req);
-    return new Response("Not Found", {status: 404});
+    if (req.method === 'OPTIONS') {
+      return withCORS(() => new Response(null))(req);
+    }
+
+    console.error('Requested route not found:', req.method, req.url);
+    return withCORS(() => new Response("Not Found", {status: 404}))(req);
   },
 });
 

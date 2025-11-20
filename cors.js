@@ -1,33 +1,33 @@
-export const withCORS = (handler) => {
-  return async (req) => {
-    const allowedOrigins = Bun.env.ALLOWED_ORIGINS.split(',');
+export const withCORS = (handler) => async (req) => {
+  const allowedOrigins = Bun.env.ALLOWED_ORIGINS.split(',');
 
-    const origin = req.headers.get("origin");
-    const corsOrigin = allowedOrigins.includes(origin) ? origin : "";
-    console.log(origin)
-    console.log(corsOrigin)
-    if (req.method === "OPTIONS") {
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": corsOrigin,
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-          "Access-Control-Allow-Credentials": "true",
-        },
-      });
-    }
+  const origin = req.headers.get("origin");
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : "";
 
-    const res = await handler(req);
+  console.log('request origin:', origin)
+  console.log('selected from env:', corsOrigin)
 
-    const headers = new Headers(res.headers);
-    headers.set("Access-Control-Allow-Origin", corsOrigin);
-    headers.set("Access-Control-Allow-Credentials", "true");
-
-    return new Response(res.body, {
-      status: res.status,
-      headers,
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": corsOrigin,
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true",
+      },
     });
-  };
+  }
+
+  const res = await handler(req);
+
+  const headers = new Headers(res.headers);
+  headers.set("Access-Control-Allow-Origin", corsOrigin);
+  headers.set("Access-Control-Allow-Credentials", "true");
+
+  return new Response(res.body, {
+    status: res.status,
+    headers,
+  });
 };
 
 export const addCORSHeaders = upstreamHeaders => {
