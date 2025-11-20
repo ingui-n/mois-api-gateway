@@ -31,12 +31,3 @@ export const withCORS = (handler) => async (req) => {
     headers,
   });
 };
-
-export const addCORSHeaders = upstreamHeaders => {
-  const headers = new Headers(upstreamHeaders);
-
-  headers.set("Access-Control-Allow-Origin", Bun.env.FRONTEND_URL);
-  headers.set("Access-Control-Allow-Credentials", "true");
-
-  return headers;
-};
