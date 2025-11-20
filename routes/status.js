@@ -1,4 +1,4 @@
-import {getCORSHeaders} from "../cors.js";
+import {addCORSHeaders} from "../cors.js";
 
 export const status = async (req, forwardUrl) => {
   const redirectUrl = new URL(forwardUrl);
@@ -8,16 +8,23 @@ export const status = async (req, forwardUrl) => {
   url.protocol = redirectUrl.protocol;
   url.pathname = '/status';
 
-  const corsHeaders = Object.fromEntries(getCORSHeaders());
-
   return fetch(url, {
     method: 'GET',
     headers: {
       ...req.headers,
-      ...corsHeaders,
     },
     duplex: "half",
   })
+    .then(async (upstreamRes) => {
+      const body = await upstreamRes.arrayBuffer();
+
+      const headers = addCORSHeaders(upstreamRes.headers);
+
+      return new Response(body, {
+        status: upstreamRes.status,
+        headers,
+      });
+    })
     .catch((err) => {
       return Response.json(err.message, {status: 500});
     });

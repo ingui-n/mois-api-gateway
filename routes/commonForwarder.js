@@ -1,5 +1,3 @@
-import {getCORSHeaders} from "../cors.js";
-
 export const commonForwarder = async (req, forwardUrl, payload) => {
   const redirectUrl = new URL(forwardUrl);
   const url = new URL(req.url);
@@ -19,13 +17,10 @@ export const commonForwarder = async (req, forwardUrl, payload) => {
     }
   }
 
-  const corsHeaders = Object.fromEntries(getCORSHeaders());
-
   return fetch(url, {
     method: req.method,
     headers: {
       ...req.headers,
-      ...corsHeaders,
       'Content-Type': 'application/json',
       'X-User-Id': payload.sub,
       'X-User-Email': payload.email,
