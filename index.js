@@ -63,17 +63,6 @@ Bun.serve({
   },
 
   fetch(req) {
-    // CORS for OPTIONS
-    if (req.method === "OPTIONS") {
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": Bun.env.FRONTEND_URL,
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      });
-    }
-
     console.error('Requested route not found:', req);
     return new Response("Not Found", {status: 404});
   },

@@ -4,7 +4,8 @@ export const withCORS = (handler) => {
 
     const origin = req.headers.get("origin");
     const corsOrigin = allowedOrigins.includes(origin) ? origin : "";
-
+    console.log(origin)
+    console.log(corsOrigin)
     if (req.method === "OPTIONS") {
       return new Response(null, {
         headers: {
