@@ -1,5 +1,5 @@
 import {authorize} from "./authorization.js";
-import {commonForwarder} from "./routes/commonForwarder.js";
+import {commonForwarder, commonForwarder2} from "./routes/commonForwarder.js";
 import {status} from "./routes/status.js";
 import {withCORS} from "./cors.js";
 
@@ -9,9 +9,10 @@ Bun.serve({
     '/status': withCORS(() => new Response("OK")),
     '/status/computers': req => status(req, Bun.env.MICROSERVICE_COMPUTERS),
     '/status/reservations': req => status(req, Bun.env.MICROSERVICE_RESERVATIONS),
+    '/test': withCORS(req => authorize(req, commonForwarder2, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
     '/faculty': {
-      GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
-      POST: req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS),
+      GET: withCORS(req => authorize(req, commonForwarder2, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS)),
+      POST: withCORS(req => authorize(req, commonForwarder2, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_COMPUTERS)),
     },
     '/faculty/:id': {
       GET: req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_COMPUTERS),
