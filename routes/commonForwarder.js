@@ -20,7 +20,8 @@ export const commonForwarder = async (req, forwardUrl, payload) => {
   return fetch(url, {
     method: req.method,
     headers: {
-      ...req.headers,
+      // ...req.headers,
+      'Content-Type': 'application/json',
       'X-User-Id': payload.sub,
       'X-User-Email': payload.email,
       'X-User-Firstname': encodeURIComponent(payload.given_name),
