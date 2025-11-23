@@ -15,7 +15,7 @@ export const withCORS = (handler) => async (req) => {
         "Access-Control-Allow-Origin": corsOrigin,
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Headers": requestedHeaders,
+        "Access-Control-Allow-Headers": requestedHeaders || "Content-Type, Authorization, X-User-Id, X-User-Email, X-User-Firstname, X-User-Lastname, X-User-Roles",
       },
     });
   }
