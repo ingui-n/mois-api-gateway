@@ -55,7 +55,7 @@ Bun.serve({
     },
     '/reservation': {
       GET: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
-      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_ADMIN, Bun.env.MICROSERVICE_RESERVATIONS)),
+      POST: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
     },
     '/reservation/:id': {
       DELETE: withCORS(req => authorize(req, commonForwarder, Bun.env.ROLE_USER, Bun.env.MICROSERVICE_RESERVATIONS)),
