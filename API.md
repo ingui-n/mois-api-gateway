@@ -41,6 +41,7 @@ Response:
       "id": "uuid",
       "name": "string",
       "shortcut": "string",
+      "email": "string",
       "reservationTimeStart": "time", // čas první možné rezervace pro každý den
       "reservationTimeEnd": "time", // čas do kdy je možné rezervovat
       "maxUserReservationCount": "number", // maximální počet rezervací celkem
@@ -71,6 +72,7 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "email": "string",
   "reservationTimeStart": "time",
   "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
@@ -92,6 +94,7 @@ Request:
 {
   "name": "string",
   "shortcut": "string",
+  "email": "string",
   "reservationTimeStart": "time",
   "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
@@ -107,6 +110,7 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "email": "string",
   "reservationTimeStart": "time",
   "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
@@ -137,6 +141,7 @@ Response:
   "id": "uuid",
   "name": "string",
   "shortcut": "string",
+  "email": "string",
   "reservationTimeStart": "time",
   "reservationTimeEnd": "time",
   "maxUserReservationCount": "number",
