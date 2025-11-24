@@ -35,19 +35,27 @@ atd. Před použitím je nutné je dekódovat. Například za použití `decodeU
 Response:
 
 ```json
-[
-  {
-    "id": "uuid",
-    "name": "string",
-    "shortcut": "string",
-    "reservationTimeStart": "time", // čas první možné rezervace pro každý den
-    "reservationTimeEnd": "time", // čas do kdy je možné rezervovat
-    "maxUserReservationCount": "number", // maximální počet rezervací celkem
-    "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci (minuty)
-    "maxUserReservationTimeWeekly": "number", // za týden pro uživatele (minuty)
-    "createdAt": "dateTime"
+{
+  "content": [
+    {
+      "id": "uuid",
+      "name": "string",
+      "shortcut": "string",
+      "reservationTimeStart": "time", // čas první možné rezervace pro každý den
+      "reservationTimeEnd": "time", // čas do kdy je možné rezervovat
+      "maxUserReservationCount": "number", // maximální počet rezervací celkem
+      "maxUserReservationTime": "number", // pro jednu konkrétní rezervaci (minuty)
+      "maxUserReservationTimeWeekly": "number", // za týden pro uživatele (minuty)
+      "createdAt": "dateTime"
+    }
+  ],
+  "page": {
+    "size": "number",
+    "number": "number",
+    "totalElements": "number",
+    "totalPages": "number"
   }
-]
+}
 ```
 
 HTTP 200
@@ -163,14 +171,22 @@ HTTP 200
 Response:
 
 ```json
-[
-  {
-    "id": "uuid",
-    "facultyId": "uuid",
-    "name": "string",
-    "createdAt": "dateTime"
+{
+  "content": [
+    {
+      "id": "uuid",
+      "facultyId": "uuid",
+      "name": "string",
+      "createdAt": "dateTime"
+    }
+  ],
+  "page": {
+    "size": "number",
+    "number": "number",
+    "totalElements": "number",
+    "totalPages": "number"
   }
-]
+}
 ```
 
 HTTP 200
@@ -266,16 +282,24 @@ HTTP 200
 Response:
 
 ```json
-[
-  {
-    "id": "uuid",
-    "name": "string",
-    "available": "boolean",
-    "computerRoomId": "uuid",
-    "configId": "uuid",
-    "createdAt": "dateTime"
+{
+  "content": [
+    {
+      "id": "uuid",
+      "name": "string",
+      "available": "boolean",
+      "computerRoomId": "uuid",
+      "configId": "uuid",
+      "createdAt": "dateTime"
+    }
+  ],
+  "page": {
+    "size": "number",
+    "number": "number",
+    "totalElements": "number",
+    "totalPages": "number"
   }
-]
+}
 ```
 
 HTTP 200
@@ -411,16 +435,24 @@ HTTP 200
 Response:
 
 ```json
-[
-  {
-    "id": "uuid",
-    "name": "string",
-    "cpu": "string",
-    "ram": "string",
-    "gpu": "string",
-    "createdAt": "dateTime"
+{
+  "content": [
+    {
+      "id": "uuid",
+      "name": "string",
+      "cpu": "string",
+      "ram": "string",
+      "gpu": "string",
+      "createdAt": "dateTime"
+    }
+  ],
+  "page": {
+    "size": "number",
+    "number": "number",
+    "totalElements": "number",
+    "totalPages": "number"
   }
-]
+}
 ```
 
 HTTP 200
