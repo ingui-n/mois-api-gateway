@@ -341,7 +341,11 @@ Response:
   "available": "boolean",
   "computerRoom": {
     "id": "uuid",
-    "facultyId": "uuid",
+    "faculty": {
+      "facultyId": "number",
+      "name": "string",
+      "shortcut": "string"
+    },
     "name": "string",
     "createdAt": "dateTime"
   },
