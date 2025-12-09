@@ -62,6 +62,12 @@ Bun.serve({
     },
   },
 
+  /**
+   * Pro HTTP metodu OPTIONS z důvodů CORS a pro vrácení 404 při neplatné cestě
+   * @param req
+   * @returns {Promise<Response>}
+   */
+
   fetch(req) {
     if (req.method === 'OPTIONS') {
       return withCORS(() => new Response(null))(req);

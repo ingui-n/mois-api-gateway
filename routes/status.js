@@ -1,3 +1,9 @@
+/**
+ * endpoint pro zjišťění statusu mikroservisy
+ * @param req
+ * @param forwardUrl
+ * @returns {Promise<Response>}
+ */
 export const status = async (req, forwardUrl) => {
   const redirectUrl = new URL(forwardUrl);
   const url = new URL(req.url);

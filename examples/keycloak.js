@@ -1,22 +1,37 @@
 const adminTokenResp = await fetch(
-  "http://localhost:8080/realms/realmName/protocol/openid-connect/token",
+  "https://mois-keycloak.inguin.cz/realms/reservation-system/protocol/openid-connect/token",
   {
     method: "POST",
     headers: {"Content-Type": "application/x-www-form-urlencoded"},
     body: new URLSearchParams({
-      client_id: "name-of-client-in-realm",
-      client_secret: "some-key-from-client-in-realm",
+      client_id: "frontend",
+      client_secret: "s0Rt6sVXRsRl4gJmcOqTj2JvV1F98EtO",
       grant_type: "client_credentials",
     }),
   }
 );
+
+/*const adminTokenResp = await fetch(
+  "https://mois-keycloak.inguin.cz/realms/master/protocol/openid-connect/token",
+  {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams({
+      client_id: "admin-cli",
+      grant_type: "password",
+      username: "kc-admin",
+      password: "ReservationSystem161025",
+    }),
+  }
+);*/
+
 
 const {access_token} = await adminTokenResp.json();
 // console.log(access_token)
 
 const createUser = async () => {
   const resp = await fetch(
-    "http://localhost:8080/admin/realms/realmName/users",
+    "https://mois-keycloak.inguin.cz/admin/realms/reservation-system/users",
     {
       method: "POST",
       headers: {
@@ -24,16 +39,16 @@ const createUser = async () => {
         Authorization: `Bearer ${access_token}`,
       },
       body: JSON.stringify({
-        username: "username",
-        email: "user@example.com",
+        username: "vasule123",
+        email: "fdgdfgd@email.cz",
         enabled: true,
         "emailVerified": true,
-        "firstName": "John",
-        "lastName": "Doe",
+        "firstName": "Johna",
+        "lastName": "Dosfd",
         credentials: [
           {
             type: "password",
-            value: "newPassword",
+            value: "numaJEduma",
             temporary: false,
           },
         ],
@@ -48,19 +63,22 @@ const createUser = async () => {
     console.log(resp)
   }
 
-  // console.log("User creation:", resp.status);
+  console.log("User creation:", resp.status);
 };
 
 const signIn = async () => {
-  const resp = await fetch("http://localhost:8080/realms/realmName/protocol/openid-connect/token", {
+  const resp = await fetch("https://mois-keycloak.inguin.cz/realms/reservation-system/protocol/openid-connect/token", {
     method: "POST",
     headers: {"Content-Type": "application/x-www-form-urlencoded"},
     body: new URLSearchParams({
       grant_type: "password",
-      client_id: "name-of-client-in-realm",
-      client_secret: "some-key-from-client-in-realm", // omit if public client
-      username: "username",
-      password: "password",
+      // client_id: "frontend-prod",
+      client_id: "frontend",
+      // client_secret: "taVzZUvENxZonAW1HjV0LibUEjdMR1XA", // omit if public client
+      client_secret: "s0Rt6sVXRsRl4gJmcOqTj2JvV1F98EtO", // omit if public client
+      username: "inguin@seznam.cz",
+      // username: "testuser0@email.com",
+      password: "numaJEduma",
     }),
   });
 
@@ -68,4 +86,5 @@ const signIn = async () => {
   console.log(data);
 };
 
+// await createUser();
 await signIn();

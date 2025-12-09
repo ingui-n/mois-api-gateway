@@ -1,3 +1,10 @@
+/**
+ * forward požadavků na konkrétní mikroservisy
+ * @param req
+ * @param forwardUrl
+ * @param payload
+ * @returns {Promise<Response>}
+ */
 export const commonForwarder = async (req, forwardUrl, payload) => {
   const redirectUrl = new URL(forwardUrl);
   const url = new URL(req.url);
@@ -17,6 +24,10 @@ export const commonForwarder = async (req, forwardUrl, payload) => {
     }
   }
 
+  /**
+   * přidání dekódovaných dat z payload do hlaviček - je to bezpečné, protože se to používá pouze pro vnitřní komunikaci
+   * požadavky se neposílají přes internet
+   */
   return fetch(url, {
     method: req.method,
     headers: {
