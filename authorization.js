@@ -40,7 +40,7 @@ const verifyToken = async req => {
  * vrací boolean na základě výsytu role v payload
  * @param payload
  * @param role
- * @returns {*}
+ * @returns boolean
  */
 const hasRole = (payload, role = "") => {
   return payload?.realm_access?.roles.includes(role);
@@ -52,7 +52,7 @@ const hasRole = (payload, role = "") => {
  * @param handler
  * @param role
  * @param forwardUrl
- * @returns {Promise<Response|*>}
+ * @returns {Promise<Response>}
  */
 export const authorize = async (req, handler, role = "", forwardUrl = "") => {
   const payload = await verifyToken(req);
